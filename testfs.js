@@ -42,10 +42,34 @@ fs.readFile('bird.jpg',function(err,data){
 
 //异步写入文件
 var content='雪下得那么认真。';
-fs.writeFile('note.txt',content,function(err){
+fs.writeFile('output.txt',content,function(err){
     if(err){
       console.log(err);
     }else{
       console.log('ok');
+    }
+});
+
+//通过stat获取文件大小以及创建时间等信息
+
+fs.stat('note.txt',function(err,stat){
+    if(err){
+        console.log(err);
+    }else{
+        //是否是文件
+        console.log(stat.isFile());
+         //是否是目录
+        console.log(stat.isDirectory());
+
+        if(stat.isFile()){
+            // 文件大小:
+            console.log('size:'+stat.size);
+            // 创建时间, Date对象:
+              console.log('size:'+stat.birthtime);
+           // 修改时间, Date对象:
+             console.log('size:'+stat.mtime);
+        }
+
+
     }
 });
