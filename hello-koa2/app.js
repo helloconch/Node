@@ -3,10 +3,6 @@
 const Koa = require('koa');
 // 创建一个Koa对象表示web app本身
 var app = new Koa();
-
-const fn_router = require('koa-router');
-const router = fn_router();
-
 //对于任何请求，app将调用该异步函数处理请求
 
 // 其中，参数ctx是由koa传入的封装了request和response的变量，我们可以通过它访问request和response，

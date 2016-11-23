@@ -7,4 +7,4 @@ register({
     presets: ['stage-3']
 });
 
-require('./app.js');
+require('./simplify_app.js');
