@@ -6,6 +6,6 @@ var fn_index = async (ctx, next) => {
     });
 
 };
-moudle.exports = {
+module.exports = {
     'GET /': fn_index
 }
