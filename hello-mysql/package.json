@@ -1,0 +1,12 @@
+{
+    "name": "mysql",
+    "version": "1.0.0",
+    "dependencies": {
+        "babel-core": "6.13.2",
+        "babel-polyfill": "6.13.0",
+        "babel-preset-es2015-node6": "0.3.0",
+        "babel-preset-stage-3": "6.5.0",
+        "sequelize": "3.24.1",
+        "mysql": "2.11.1"
+    }
+}
