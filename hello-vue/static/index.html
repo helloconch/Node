@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <!-- 引用jQuery -->
+    <script src="/static/js/jquery-3.1.1.min.js"></script>
+
+    <!-- 引用Vue -->
+    <script src="/static/js/vue.min.js"></script>
+
+    <script>
+        $(function () {
+             var vm = new Vue({
+             el: '#vm',
+             data: {
+             name: '',
+             email: ''
+             },
+             methods:{
+                 register:function(){
+                     alert(JSON.stringify(this.$data));
+                 }
+             }
+    });
+    window.vm = vm;
+       });
+</script>
+
+</head>
+
+<body>
+
+    <form id="vm" action="#" v-on:submit.prevent="register">
+        <p><input v-model="email" /></p>
+        <p><input v-model="name" /></p>
+        <button type="submit">submit</button>
+    </form>
+
+</body>
+<html>
