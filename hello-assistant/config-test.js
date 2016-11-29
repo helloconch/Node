@@ -1,7 +1,7 @@
 'use strict'
 // 测试配置信息
 var config = {
-    database: 'assistant',
+    database: 'massistant',
     username: 'root',
     password: '',
     host: 'localhost',
