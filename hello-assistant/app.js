@@ -13,13 +13,14 @@ const Koa = require('koa');
 const bodyParser = require('koa-bodyparser');
 const controller = require('./controller');
 const templating = require('./templating');
+const rest = require('./rest');
 const app = new Koa();
 const isProduction = process.env.NODE_ENV === 'production';
 
 // 打印请求URL
 app.use(async (ctx, next) => {
 
-    console.log(`抓取----方法名${ctx.method} : 请求url${ctx.request.url}`);
+    console.log(`app.js抓取----方法名:${ctx.method} : 请求url:${ctx.request.url}  :请求路径${ctx.request.path}`);
 
     var start = new Date().getTime();
     var execTime;
@@ -44,6 +45,8 @@ app.use(templating('views', {
     noCache: !isProduction,
     watch: !isProduction
 }));
+//bind .rest() for ctx
+app.use(rest.restify());
 
 // add controller:
 app.use(controller());

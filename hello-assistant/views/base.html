@@ -6,8 +6,12 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="description" content="生活助手">
     <title>{{ title }}</title>
+    <script src="/static/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/static/css/bootstrap.css">
     <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/vue.min.js"></script>
+    <script src="/static/js/vue-resource.min.js"></script>
+
 </head>
 
 <body>
@@ -18,18 +22,17 @@
             </div>
         </div>
     </header>-->
-    <div id="important" style="color:#cdbfe3; background-color:#6f5499; padding:30px 0; margin:-20px 0 20px 0;">
+    <!--<div id="important" style="color:#cdbfe3; background-color:#6f5499; padding:30px 0; margin:-20px 0 20px 0;">
         <div class="container">
             <h1 style="color:#fff; font-size:60px">生活助手</h1>
-            <p style="font-size:24px; line-height:48px">Success is getting what you want, happiness is wanting what you get.</p>
         </div>
-    </div>
+    </div>-->
     {% block main %} {% endblock %}
-    <footer style="background-color:#ddd; padding: 40px 0;">
+    <!--<footer style="background-color:#ddd; padding: 40px 0;margin-top:30px">
         <div class="container">
-            <p>This JavaScript course is created by <a target="_blank" href="#">@CONCH</a>.</p>
+            <p>This JavaScript course is created by <a href="#">@CONCH</a>.</p>
         </div>
-    </footer>
+    </footer>-->
 </body>
 
 </html>

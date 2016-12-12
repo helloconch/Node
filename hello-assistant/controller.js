@@ -5,19 +5,19 @@ function addMapping(router,mapping){
         if (url.startsWith('GET ')) {
             var path = url.substring(4);
             router.get(path, mapping[url]);
-            console.log(`抓取register URL mapping: GET ${path}`);
+            console.log(`controller.js抓取register URL mapping: GET ${path}`);
         } else if (url.startsWith('POST ')) {
             var path = url.substring(5);
             router.post(path, mapping[url]);
-            console.log(`抓取register URL mapping: POST ${path}`);
+            console.log(`controller.js抓取register URL mapping: POST ${path}`);
         } else if (url.startsWith('PUT ')) {
             var path = url.substring(4);
             router.put(path, mapping[url]);
-            console.log(`抓取register URL mapping: PUT ${path}`);
+            console.log(`controller.js抓取register URL mapping: PUT ${path}`);
         } else if (url.startsWith('DELETE ')) {
             var path = url.substring(7);
             router.del(path, mapping[url]);
-            console.log(`抓取register URL mapping: DELETE ${path}`);
+            console.log(`controller.js抓取register URL mapping: DELETE ${path}`);
         } else {
             console.log(`抓取invalid URL: ${url}`);
         }
@@ -28,7 +28,7 @@ function addControllers(router, dir) {
     fs.readdirSync(__dirname + '/' + dir).filter((f) => {
         return f.endsWith('.js');
     }).forEach((f) => {
-        console.log(`抓取process controller: ${f}...`);
+        console.log(`controller.js抓取process controller: ${f}...`);
         let mapping = require(__dirname + '/' + dir + '/' + f);
         addMapping(router, mapping);
     });

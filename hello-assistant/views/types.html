@@ -1,0 +1,139 @@
+{% extends "base.html" %} {% block main %}
+<script>
+
+function showError(resp){
+    resp.json().then(function(result){
+    alert('Error:'+result.message);
+    });
+}
+
+$(function () {
+
+    var vm = new Vue({
+ 
+        delimiters: ['${', '}'],
+        el: '#vm',
+        http: {
+            timeout: 5000
+        },
+        data: {
+            todos:[],
+            loading: false
+        },
+
+        created: function () {
+        this.init();
+        },
+
+        methods:{
+
+            init:function(){
+            var that=this;
+            that.$resource('/api/types').get().then(function(resp){
+                that.loading=false;
+                    resp.json().then(function(result){
+                           that.todos=result.types;
+                   });
+            },function(resp){
+                 that.loading=false;
+                 showError(resp);
+            });
+            },
+
+            create:function(todo){
+               var that=this;
+               that.$resource('/api/types').save(todo).then(function(resp){
+                    that.loading=false;
+                   resp.json().then(function(result){
+                           that.todos.push(result);
+                   });
+               },function(resp){
+                    that.loading=false;
+                    showError(resp);
+               });
+            },
+            update:function(item,prop,e){
+                var that=this;
+                var t={
+                    name:item.name
+                };
+                t[prop]=e.target.innerText;
+                if(t[prop]===item[prop]){
+                    return;
+                }
+                that.$resource('/api/types/'+item.id).update(t).then(function(resp){
+                  resp.json().then(function (r) {
+                      if(r.result){
+                           alert('update success');
+                      }
+                    });
+                },function(resp){
+                    e.target.innerText=item[prop];
+                    showError(resp);
+                });
+            },
+            remove:function(item){
+               var that=this;
+               that.$resource('/api/types/'+item.id).delete().then(function(resp){
+                 resp.json().then(function (r) {
+                      if(r.result){
+                           alert('delete success');
+                      }
+                    });
+                   var i, index = -1;
+                    for (i=0; i<that.todos.length; i++) {
+                        if (that.todos[i].id === item.id) {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (index >= 0) {
+                        that.todos.splice(index, 1);
+                    }
+
+               },showError);
+            }
+
+        }
+    });
+    window.vm = vm;
+
+   var vmAdd=new Vue({
+    
+       el:'#vmAdd',
+       data:{
+          typeName: ''
+       },
+       methods:{
+           submit:function(){
+               vm.create(this.$data);
+               this.typeName = '';
+           }
+       }
+
+   });
+
+});
+</script>
+<div class="container">
+    <form id="vmAdd" action="#" v-on:submit.prevent="submit">
+        <div class="form-group">
+            <label>类别名称</label>
+            <input type="text" v-model="typeName" class="form-control" placeholder="input type name">
+        </div>
+        <button type="submit" class="btn btn-primary">insert</button>
+    </form>
+
+
+    <div id="vm">
+        <li v-for="item of todos">
+            <dl>
+                <dt contenteditable="true" v-on:blur="update(item, 'name', $event)">${ item.name }</dt>
+                <dd><a href="#0" v-on:click="remove(item)">Delete</a></dd>
+            </dl>
+        </li>
+    </div>
+
+</div>
+
+{% endblock %}

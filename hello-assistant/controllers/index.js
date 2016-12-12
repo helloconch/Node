@@ -1,10 +1,15 @@
 'use strict'
-var fn_get=async(ctx,next)=>{
+var fn_get = async (ctx, next) => {
     ctx.render('index.html', {
-            title: 'Welcome'
-        });
+        title: 'Welcome'
+    });
 };
 
-module.exports={
-    'GET /':fn_get
+var fn_types = async (ctx, next) => {
+    ctx.render('types.html');
+}
+
+module.exports = {
+    'GET /': fn_get,
+    'GET /TYPES': fn_types
 };
